@@ -14,7 +14,7 @@ const SimplePriceTable = ({ data, title }) => {
           {data.services.map((service, idx) => (
             <tr key={idx}>
               <td>{service.name}</td>
-              <td>{service.price !== null ? `${service.price} ₽` : '—'}</td>
+              <td>{service.price !== null ? service.price : '—'}</td>
             </tr>
           ))}
         </tbody>

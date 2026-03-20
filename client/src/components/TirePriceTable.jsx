@@ -21,7 +21,7 @@ const TirePriceTable = ({ data, filteredRadiuses }) => {
                 <td>{service.name}</td>
                 {filteredRadiuses.map((radius, i) => {
                   const idx = data.radiuses.indexOf(radius);
-                  return <td key={i}>{service.prices[idx] !== null ? `${service.prices[idx]} ₽` : '—'}</td>;
+                  return <td key={i}>{service.prices[idx] !== null ? service.prices[idx] : '—'}</td>;
                 })}
               </tr>
             ))}
