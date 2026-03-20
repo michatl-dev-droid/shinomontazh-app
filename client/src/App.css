@@ -22,8 +22,8 @@ h1 {
 }
 
 /* Навигация */
-navbar {
-  background: linear-gradient(90deg, #333333 0%, #8B0000 100%);
+.navbar {
+  background: linear-gradient(90deg, #2c2c2c 0%, #b22222 50%, #8B0000 100%);
   padding: 1rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
