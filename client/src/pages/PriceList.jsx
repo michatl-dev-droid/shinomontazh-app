@@ -5,9 +5,8 @@ const PriceList = () => {
   const [activeSubType, setActiveSubType] = useState('standard');
   const [radiusFilter, setRadiusFilter] = useState('all');
 
-  // Данные прайс-листа
+  // Данные прайс-листа (оставляем как есть)
   const priceData = {
-    // ЛЕГКОВЫЕ (passenger)
     passenger: {
       standard: {
         name: 'Легковые (стандарт)',
@@ -38,8 +37,6 @@ const PriceList = () => {
         ]
       }
     },
-
-    // КРОССОВЕРЫ (suv)
     suv: {
       standard: {
         name: 'Кроссоверы / Внедорожники',
@@ -70,72 +67,48 @@ const PriceList = () => {
         ]
       }
     },
-
-    // МГТ
-    mgt: {
-      name: 'МГТ',
-      bgColor: '#f5f5f5',
-      services: [
-        { name: 'Съём + шиномонтаж + балансировка + установка', price: 1500 },
-        { name: 'Съём + балансировка + установка', price: 1000 },
-        { name: 'Съём + установка', price: 710 },
-        { name: 'Демонтаж', price: 230 },
-        { name: 'Монтаж', price: 270 },
-        { name: 'Балансировка', price: 290 },
-        { name: 'Проверка биения', price: 140 },
-        { name: 'Правка диска СТАЛЬ', price: 1670 },
-        { name: 'Правка диска ЛИТЬЕ', price: null }
-      ]
-    },
-
-    // РЕМОНТ ШИН
-    repair: {
-      name: 'Ремонт шин',
-      bgColor: '#f5f5f5',
-      services: [
-        { name: 'Гриб 7 или заплатка мини', price: 390 },
-        { name: 'Гриб 9 или заплатка средняя', price: 450 },
-        { name: 'Гриб 12 или заплатка большая', price: 500 },
-        { name: 'Жгут', price: 390 },
-        { name: 'Пластырь кордовый с 10 до 12', price: 780 },
-        { name: 'Пластырь кордовый с 14 до 16', price: 890 },
-        { name: 'Пластырь кордовый с 17 до 20', price: 1120 },
-        { name: 'Пластырь кордовый 231 и тп', price: 1670 },
-        { name: 'На камеру заплатка мини', price: 390 },
-        { name: 'На камеру заплатка средняя', price: 450 },
-        { name: 'На камеру заплатка большая', price: 500 }
-      ]
-    },
-
-    // ТОВАРЫ
-    goods: {
-      name: 'Товары',
-      bgColor: '#f5f5f5',
-      services: [
-        { name: 'Дополнительный груз', price: 140 },
-        { name: 'Вентиль', price: 140 },
-        { name: 'Пакет малый', price: 60 },
-        { name: 'Пакет большой', price: 80 }
-      ]
-    },
-
-    // ДОПОЛНИТЕЛЬНЫЕ РАБОТЫ
-    extra: {
-      name: 'Дополнительные работы',
-      bgColor: '#f5f5f5',
-      services: [
-        { name: 'Вулканизация', price: 780 },
-        { name: 'Установка вашего вентиля', price: 70 },
-        { name: 'Снятие секреток', price: 890 },
-        { name: 'Снятие слизанных, не откручивающихся болтов', price: 780 },
-        { name: 'Подкачать колесо', price: 60 },
-        { name: 'Смазка медная 1 ступицы', price: 120 },
-        { name: 'Зачистка 1 ступицы', price: 120 },
-        { name: 'Монтаж или демонтаж камеры', price: 120 },
-        { name: 'Установка датчика давления', price: 450 },
-        { name: 'Оптимизация шины за 1 колесо', price: 230 }
-      ]
-    }
+    mgt: { name: 'МГТ', bgColor: '#f5f5f5', services: [
+      { name: 'Съём + шиномонтаж + балансировка + установка', price: 1500 },
+      { name: 'Съём + балансировка + установка', price: 1000 },
+      { name: 'Съём + установка', price: 710 },
+      { name: 'Демонтаж', price: 230 },
+      { name: 'Монтаж', price: 270 },
+      { name: 'Балансировка', price: 290 },
+      { name: 'Проверка биения', price: 140 },
+      { name: 'Правка диска СТАЛЬ', price: 1670 },
+      { name: 'Правка диска ЛИТЬЕ', price: null }
+    ] },
+    repair: { name: 'Ремонт шин', bgColor: '#f5f5f5', services: [
+      { name: 'Гриб 7 или заплатка мини', price: 390 },
+      { name: 'Гриб 9 или заплатка средняя', price: 450 },
+      { name: 'Гриб 12 или заплатка большая', price: 500 },
+      { name: 'Жгут', price: 390 },
+      { name: 'Пластырь кордовый с 10 до 12', price: 780 },
+      { name: 'Пластырь кордовый с 14 до 16', price: 890 },
+      { name: 'Пластырь кордовый с 17 до 20', price: 1120 },
+      { name: 'Пластырь кордовый 231 и тп', price: 1670 },
+      { name: 'На камеру заплатка мини', price: 390 },
+      { name: 'На камеру заплатка средняя', price: 450 },
+      { name: 'На камеру заплатка большая', price: 500 }
+    ] },
+    goods: { name: 'Товары', bgColor: '#f5f5f5', services: [
+      { name: 'Дополнительный груз', price: 140 },
+      { name: 'Вентиль', price: 140 },
+      { name: 'Пакет малый', price: 60 },
+      { name: 'Пакет большой', price: 80 }
+    ] },
+    extra: { name: 'Дополнительные работы', bgColor: '#f5f5f5', services: [
+      { name: 'Вулканизация', price: 780 },
+      { name: 'Установка вашего вентиля', price: 70 },
+      { name: 'Снятие секреток', price: 890 },
+      { name: 'Снятие слизанных, не откручивающихся болтов', price: 780 },
+      { name: 'Подкачать колесо', price: 60 },
+      { name: 'Смазка медная 1 ступицы', price: 120 },
+      { name: 'Зачистка 1 ступицы', price: 120 },
+      { name: 'Монтаж или демонтаж камеры', price: 120 },
+      { name: 'Установка датчика давления', price: 450 },
+      { name: 'Оптимизация шины за 1 колесо', price: 230 }
+    ] }
   };
 
   const getCurrentData = () => {
@@ -162,68 +135,23 @@ const PriceList = () => {
       <div className="filter-section">
         <h3>Категории услуг</h3>
         <div className="filters">
-          <button 
-            className={activeType === 'passenger' ? 'active passenger' : ''}
-            onClick={() => { setActiveType('passenger'); setActiveSubType('standard'); setRadiusFilter('all'); }}
-          >
-            Легковые
-          </button>
-          <button 
-            className={activeType === 'suv' ? 'active suv' : ''}
-            onClick={() => { setActiveType('suv'); setActiveSubType('standard'); setRadiusFilter('all'); }}
-          >
-            Кроссоверы / Внедорожники
-          </button>
-          <button 
-            className={activeType === 'mgt' ? 'active' : ''}
-            onClick={() => { setActiveType('mgt'); setRadiusFilter('all'); }}
-          >
-            МГТ
-          </button>
-          <button 
-            className={activeType === 'repair' ? 'active' : ''}
-            onClick={() => { setActiveType('repair'); setRadiusFilter('all'); }}
-          >
-            Ремонт шин
-          </button>
-          <button 
-            className={activeType === 'goods' ? 'active' : ''}
-            onClick={() => { setActiveType('goods'); setRadiusFilter('all'); }}
-          >
-            Товары
-          </button>
-          <button 
-            className={activeType === 'extra' ? 'active' : ''}
-            onClick={() => { setActiveType('extra'); setRadiusFilter('all'); }}
-          >
-            Доп. работы
-          </button>
+          <button className={activeType === 'passenger' ? 'active passenger' : ''} onClick={() => { setActiveType('passenger'); setActiveSubType('standard'); setRadiusFilter('all'); }}>Легковые</button>
+          <button className={activeType === 'suv' ? 'active suv' : ''} onClick={() => { setActiveType('suv'); setActiveSubType('standard'); setRadiusFilter('all'); }}>Кроссоверы / Внедорожники</button>
+          <button className={activeType === 'mgt' ? 'active' : ''} onClick={() => { setActiveType('mgt'); setRadiusFilter('all'); }}>МГТ</button>
+          <button className={activeType === 'repair' ? 'active' : ''} onClick={() => { setActiveType('repair'); setRadiusFilter('all'); }}>Ремонт шин</button>
+          <button className={activeType === 'goods' ? 'active' : ''} onClick={() => { setActiveType('goods'); setRadiusFilter('all'); }}>Товары</button>
+          <button className={activeType === 'extra' ? 'active' : ''} onClick={() => { setActiveType('extra'); setRadiusFilter('all'); }}>Доп. работы</button>
         </div>
       </div>
 
-      {/* Блок 2 - Тип шин (только для легковых и кроссоверов) */}
+      {/* Блок 2 - Тип шин */}
       {(activeType === 'passenger' || activeType === 'suv') && (
         <div className="filter-section">
           <h3>Тип шин</h3>
-          <div className="sub-filters-container" style={{ 
-            marginTop: '10px', 
-            padding: '10px', 
-            borderRadius: '8px',
-            backgroundColor: activeType === 'passenger' ? '#fff9e6' : '#e6f3ff'
-          }}>
+          <div className="sub-filters-container" style={{ marginTop: '10px', padding: '10px', borderRadius: '8px', backgroundColor: activeType === 'passenger' ? '#fff9e6' : '#e6f3ff' }}>
             <div className="sub-filters" style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-              <button 
-                className={activeSubType === 'standard' ? 'active' : ''}
-                onClick={() => setActiveSubType('standard')}
-              >
-                Обычные шины
-              </button>
-              <button 
-                className={activeSubType === 'runflat' ? 'active' : ''}
-                onClick={() => setActiveSubType('runflat')}
-              >
-                RFT / Низкий профиль
-              </button>
+              <button className={activeSubType === 'standard' ? 'active' : ''} onClick={() => setActiveSubType('standard')}>Обычные шины</button>
+              <button className={activeSubType === 'runflat' ? 'active' : ''} onClick={() => setActiveSubType('runflat')}>RFT / Низкий профиль</button>
             </div>
           </div>
         </div>
@@ -233,26 +161,10 @@ const PriceList = () => {
       {(activeType === 'passenger' || activeType === 'suv') && currentData && (
         <div className="filter-section">
           <h3>Фильтр по радиусу</h3>
-          <div className="radius-filter" style={{ 
-            display: 'flex',
-            alignItems: 'center',
-            gap: '10px',
-            flexWrap: 'wrap'
-          }}>
-            <button 
-              className={`radius-btn ${radiusFilter === 'all' ? 'active' : ''}`}
-              onClick={() => setRadiusFilter('all')}
-            >
-              Все
-            </button>
+          <div className="radius-filter" style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+            <button className={`radius-btn ${radiusFilter === 'all' ? 'active' : ''}`} onClick={() => setRadiusFilter('all')}>Все</button>
             {currentData.radiuses.map(radius => (
-              <button
-                key={radius}
-                className={`radius-btn ${radiusFilter === radius.toString() ? 'active' : ''}`}
-                onClick={() => setRadiusFilter(radius.toString())}
-              >
-                R{radius}
-              </button>
+              <button key={radius} className={`radius-btn ${radiusFilter === radius.toString() ? 'active' : ''}`} onClick={() => setRadiusFilter(radius.toString())}>R{radius}</button>
             ))}
           </div>
         </div>
@@ -260,6 +172,7 @@ const PriceList = () => {
 
       {/* Отображение прайса */}
       <div className="price-content" style={{ marginTop: '30px' }}>
+        
         {/* Легковые */}
         {activeType === 'passenger' && (
           <div className="card" style={{ backgroundColor: priceData.passenger[activeSubType].bgColor }}>
@@ -270,21 +183,16 @@ const PriceList = () => {
                 <thead>
                   <tr>
                     <th style={{ minWidth: '250px' }}>Услуга</th>
-                    {filteredRadiuses.map(radius => (
-                      <th key={radius}>R{radius}</th>
-                    ))}
-                  </thead>
+                    {filteredRadiuses.map(radius => <th key={radius}>R{radius}</th>)}
+                  </tr>
+                </thead>
                 <tbody>
                   {priceData.passenger[activeSubType].services.map((service, idx) => (
                     <tr key={idx}>
                       <td>{service.name}</td>
                       {filteredRadiuses.map((radius, i) => {
                         const radiusIndex = priceData.passenger[activeSubType].radiuses.indexOf(radius);
-                        return (
-                          <td key={i}>
-                            {service.prices[radiusIndex] !== null ? `${service.prices[radiusIndex]} ₽` : '—'}
-                          </td>
-                        );
+                        return <td key={i}>{service.prices[radiusIndex] !== null ? `${service.prices[radiusIndex]} ₽` : '—'}</td>;
                       })}
                     </tr>
                   ))}
@@ -304,21 +212,16 @@ const PriceList = () => {
                 <thead>
                   <tr>
                     <th style={{ minWidth: '250px' }}>Услуга</th>
-                    {filteredRadiuses.map(radius => (
-                      <th key={radius}>R{radius}</th>
-                    ))}
-                  </thead>
+                    {filteredRadiuses.map(radius => <th key={radius}>R{radius}</th>)}
+                  </tr>
+                </thead>
                 <tbody>
                   {priceData.suv[activeSubType].services.map((service, idx) => (
                     <tr key={idx}>
                       <td>{service.name}</td>
                       {filteredRadiuses.map((radius, i) => {
                         const radiusIndex = priceData.suv[activeSubType].radiuses.indexOf(radius);
-                        return (
-                          <td key={i}>
-                            {service.prices[radiusIndex] !== null ? `${service.prices[radiusIndex]} ₽` : '—'}
-                          </td>
-                        );
+                        return <td key={i}>{service.prices[radiusIndex] !== null ? `${service.prices[radiusIndex]} ₽` : '—'}</td>;
                       })}
                     </tr>
                   ))}
@@ -333,17 +236,10 @@ const PriceList = () => {
           <div className="card" style={{ backgroundColor: priceData.mgt.bgColor }}>
             <h2>{priceData.mgt.name}</h2>
             <table className="price-table">
-              <thead>
-                <tr>
-                  <th>Услуга</th>
-                  <th>Цена</th>
-                </thead>
+              <thead><tr><th>Услуга</th><th>Цена</th></tr></thead>
               <tbody>
                 {priceData.mgt.services.map((service, idx) => (
-                  <tr key={idx}>
-                    <td>{service.name}</td>
-                    <td>{service.price !== null ? `${service.price} ₽` : '—'}</td>
-                  </tr>
+                  <tr key={idx}><td>{service.name}</td><td>{service.price !== null ? `${service.price} ₽` : '—'}</td></tr>
                 ))}
               </tbody>
             </table>
@@ -355,17 +251,10 @@ const PriceList = () => {
           <div className="card" style={{ backgroundColor: priceData.repair.bgColor }}>
             <h2>{priceData.repair.name}</h2>
             <table className="price-table">
-              <thead>
-                <tr>
-                  <th>Услуга</th>
-                  <th>Цена</th>
-                </thead>
+              <thead><tr><th>Услуга</th><th>Цена</th></tr></thead>
               <tbody>
                 {priceData.repair.services.map((service, idx) => (
-                  <tr key={idx}>
-                    <td>{service.name}</td>
-                    <td>{service.price} ₽</td>
-                  </tr>
+                  <tr key={idx}><td>{service.name}</td><td>{service.price} ₽</td></tr>
                 ))}
               </tbody>
             </table>
@@ -377,17 +266,10 @@ const PriceList = () => {
           <div className="card" style={{ backgroundColor: priceData.goods.bgColor }}>
             <h2>{priceData.goods.name}</h2>
             <table className="price-table">
-              <thead>
-                <tr>
-                  <th>Услуга</th>
-                  <th>Цена</th>
-                </thead>
+              <thead><tr><th>Услуга</th><th>Цена</th></tr></thead>
               <tbody>
                 {priceData.goods.services.map((service, idx) => (
-                  <tr key={idx}>
-                    <td>{service.name}</td>
-                    <td>{service.price} ₽</td>
-                  </tr>
+                  <tr key={idx}><td>{service.name}</td><td>{service.price} ₽</td></tr>
                 ))}
               </tbody>
             </table>
@@ -399,17 +281,10 @@ const PriceList = () => {
           <div className="card" style={{ backgroundColor: priceData.extra.bgColor }}>
             <h2>{priceData.extra.name}</h2>
             <table className="price-table">
-              <thead>
-                <tr>
-                  <th>Услуга</th>
-                  <th>Цена</th>
-                </thead>
+              <thead><tr><th>Услуга</th><th>Цена</th></tr></thead>
               <tbody>
                 {priceData.extra.services.map((service, idx) => (
-                  <tr key={idx}>
-                    <td>{service.name}</td>
-                    <td>{service.price} ₽</td>
-                  </tr>
+                  <tr key={idx}><td>{service.name}</td><td>{service.price} ₽</td></tr>
                 ))}
               </tbody>
             </table>
@@ -418,122 +293,25 @@ const PriceList = () => {
       </div>
 
       <style>{`
-        .filters {
-          display: flex;
-          gap: 10px;
-          flex-wrap: wrap;
-          margin-bottom: 20px;
-        }
-        .filters button {
-          padding: 10px 20px;
-          border: 1px solid #ddd;
-          background: white;
-          border-radius: 4px;
-          cursor: pointer;
-          transition: all 0.3s;
-          font-weight: 500;
-        }
-        .filters button:hover {
-          background: #f0f0f0;
-        }
-        .filters button.active.passenger {
-          background: #ffe066;
-          color: #333;
-          border-color: #ffd966;
-        }
-        .filters button.active.suv {
-          background: #99ccff;
-          color: #333;
-          border-color: #80b3ff;
-        }
-        .filters button.active:not(.passenger):not(.suv) {
-          background: #2196F3;
-          color: white;
-          border-color: #1976D2;
-        }
-        
-        .sub-filters button {
-          padding: 8px 16px;
-          border: 1px solid #ddd;
-          background: white;
-          border-radius: 4px;
-          cursor: pointer;
-          transition: all 0.3s;
-        }
-        .sub-filters button:hover {
-          background: #f0f0f0;
-        }
-        .sub-filters button.active {
-          background: #2196F3;
-          color: white;
-          border-color: #1976D2;
-        }
-
-        .radius-btn {
-          padding: 5px 10px;
-          border: 1px solid #ddd;
-          background: white;
-          border-radius: 4px;
-          cursor: pointer;
-          transition: all 0.3s;
-          font-size: 14px;
-        }
-        .radius-btn:hover {
-          background: #e0e0e0;
-        }
-        .radius-btn.active {
-          background: #2196F3;
-          color: white;
-          border-color: #1976D2;
-        }
-
-        .filter-section {
-          border: 1px solid #ddd;
-          border-radius: 12px;
-          padding: 15px;
-          margin-bottom: 20px;
-          background-color: #fafafa;
-        }
-        .filter-section h3 {
-          margin-top: 0;
-          margin-bottom: 15px;
-          font-size: 16px;
-          color: #333;
-          font-weight: 500;
-        }
-
-        .price-table {
-          width: 100%;
-          border-collapse: collapse;
-        }
-        .price-table th,
-        .price-table td {
-          padding: 12px;
-          text-align: left;
-          border-bottom: 1px solid #ddd;
-        }
-        .price-table th {
-          background-color: rgba(255,255,255,0.7);
-          font-weight: 600;
-        }
-        .price-table td {
-          color: #333;
-        }
-        .card {
-          background: white;
-          border-radius: 8px;
-          padding: 20px;
-          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        @media (max-width: 768px) {
-          .price-table {
-            font-size: 14px;
-          }
-          .price-table th,
-          .price-table td {
-            padding: 8px;
-          }
-        }
+        .filters { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+        .filters button { padding: 10px 20px; border: 1px solid #ddd; background: white; border-radius: 4px; cursor: pointer; transition: all 0.3s; font-weight: 500; }
+        .filters button:hover { background: #f0f0f0; }
+        .filters button.active.passenger { background: #ffe066; color: #333; border-color: #ffd966; }
+        .filters button.active.suv { background: #99ccff; color: #333; border-color: #80b3ff; }
+        .filters button.active:not(.passenger):not(.suv) { background: #2196F3; color: white; border-color: #1976D2; }
+        .sub-filters button { padding: 8px 16px; border: 1px solid #ddd; background: white; border-radius: 4px; cursor: pointer; transition: all 0.3s; }
+        .sub-filters button:hover { background: #f0f0f0; }
+        .sub-filters button.active { background: #2196F3; color: white; border-color: #1976D2; }
+        .radius-btn { padding: 5px 10px; border: 1px solid #ddd; background: white; border-radius: 4px; cursor: pointer; transition: all 0.3s; font-size: 14px; }
+        .radius-btn:hover { background: #e0e0e0; }
+        .radius-btn.active { background: #2196F3; color: white; border-color: #1976D2; }
+        .filter-section { border: 1px solid #ddd; border-radius: 12px; padding: 15px; margin-bottom: 20px; background-color: #fafafa; }
+        .filter-section h3 { margin-top: 0; margin-bottom: 15px; font-size: 16px; color: #333; font-weight: 500; }
+        .price-table { width: 100%; border-collapse: collapse; }
+        .price-table th, .price-table td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        .price-table th { background-color: rgba(255,255,255,0.7); font-weight: 600; }
+        .card { background: white; border-radius: 8px; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        @media (max-width: 768px) { .price-table { font-size: 14px; } .price-table th, .price-table td { padding: 8px; } }
       `}</style>
     </div>
   );
