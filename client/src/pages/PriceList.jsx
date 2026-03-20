@@ -107,7 +107,7 @@ const PriceList = () => {
   .filter-section h3 { margin: 0 0 6px; font-size: 13px; color: #333; font-weight: 500; }
   
   .price-table { width: 100%; border-collapse: collapse; }
-  .price-table th, .price-table td { padding: 10px 8px; text-align: left; border-bottom: 1px solid #ddd; font-size: 13px; }
+  .price-table th, .price-table td { padding: 10px 8px; text-align: left; border-bottom: 1px solid #ddd; font-size: 14px; }
   .price-table th { background: rgba(255,255,255,0.7); font-weight: 600; }
   .card { background: white; border-radius: 8px; padding: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 20px; }
   
