@@ -88,32 +88,36 @@ const PriceList = () => {
       </div>
 
       <style>{`
-        .filters { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
-        .filters button { padding: 10px 20px; border: 1px solid #ddd; background: white; border-radius: 4px; cursor: pointer; font-weight: 500; transition: all 0.3s; }
-        .filters button:hover { background: #f0f0f0; }
-        .filters button.active.passenger { background: #ffe066; color: #333; border-color: #ffd966; }
-        .filters button.active.suv { background: #99ccff; color: #333; border-color: #80b3ff; }
-        .filters button.active:not(.passenger):not(.suv) { background: #2196F3; color: white; border-color: #1976D2; }
-        
-        .sub-filters button { padding: 8px 16px; border: 1px solid #ddd; background: white; border-radius: 4px; cursor: pointer; }
-        .sub-filters button.active { background: #2196F3; color: white; border-color: #1976D2; }
-        
-        .radius-btn { padding: 5px 10px; border: 1px solid #ddd; background: white; border-radius: 4px; cursor: pointer; font-size: 14px; }
-        .radius-btn.active { background: #2196F3; color: white; }
-        
-        .filter-section { border: 1px solid #ddd; border-radius: 12px; padding: 15px; margin-bottom: 20px; background: #fafafa; }
-        .filter-section h3 { margin: 0 0 15px; font-size: 16px; color: #333; font-weight: 500; }
-        
-        .price-table { width: 100%; border-collapse: collapse; }
-        .price-table th, .price-table td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
-        .price-table th { background: rgba(255,255,255,0.7); font-weight: 600; }
-        .card { background: white; border-radius: 8px; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 20px; }
-        
-        @media (max-width: 768px) {
-          .price-table { font-size: 14px; }
-          .price-table th, .price-table td { padding: 8px; }
-        }
-      `}</style>
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 0; }
+  .filters button { padding: 5px 12px; border: 1px solid #ddd; background: white; border-radius: 4px; cursor: pointer; font-weight: 500; font-size: 13px; transition: all 0.3s; }
+  .filters button:hover { background: #f0f0f0; }
+  .filters button.active.passenger { background: #ffe066; color: #333; border-color: #ffd966; }
+  .filters button.active.suv { background: #99ccff; color: #333; border-color: #80b3ff; }
+  .filters button.active:not(.passenger):not(.suv) { background: #2196F3; color: white; border-color: #1976D2; }
+  
+  .sub-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 5px; }
+  .sub-filters button { padding: 4px 10px; border: 1px solid #ddd; background: white; border-radius: 4px; cursor: pointer; font-size: 12px; }
+  .sub-filters button.active { background: #2196F3; color: white; border-color: #1976D2; }
+  
+  .radius-filter { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 5px; }
+  .radius-btn { padding: 3px 8px; border: 1px solid #ddd; background: white; border-radius: 4px; cursor: pointer; font-size: 12px; }
+  .radius-btn.active { background: #2196F3; color: white; }
+  
+  .filter-section { border: 1px solid #ddd; border-radius: 10px; padding: 8px 12px; margin-bottom: 12px; background: #fafafa; }
+  .filter-section h3 { margin: 0 0 6px; font-size: 13px; color: #333; font-weight: 500; }
+  
+  .price-table { width: 100%; border-collapse: collapse; }
+  .price-table th, .price-table td { padding: 10px 8px; text-align: left; border-bottom: 1px solid #ddd; font-size: 13px; }
+  .price-table th { background: rgba(255,255,255,0.7); font-weight: 600; }
+  .card { background: white; border-radius: 8px; padding: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 20px; }
+  
+  @media (max-width: 768px) {
+    .price-table { font-size: 12px; }
+    .price-table th, .price-table td { padding: 6px; }
+    .filters button { padding: 4px 10px; font-size: 12px; }
+    .filter-section h3 { font-size: 12px; }
+  }
+`}</style>
     </div>
   );
 };
