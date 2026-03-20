@@ -112,7 +112,7 @@ const PriceList = () => {
   .card { background: white; border-radius: 8px; padding: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 20px; }
   
   @media (max-width: 768px) {
-    .price-table { font-size: 12px; }
+    .price-table { font-size: 14px; }
     .price-table th, .price-table td { padding: 6px; }
     .filters button { padding: 4px 10px; font-size: 12px; }
     .filter-section h3 { font-size: 12px; }
