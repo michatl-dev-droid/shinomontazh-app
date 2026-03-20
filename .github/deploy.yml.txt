@@ -1,0 +1,47 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Install dependencies and build frontend
+        run: |
+          cd client
+          npm install
+          npm run build
+          
+      - name: Deploy to server via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /root/shinomontazh-app
+            git pull origin main
+            
+            cd client
+            rm -rf dist
+            mkdir -p dist
+            
+            # Копируем собранные файлы из GitHub Actions на сервер
+            cp -r /tmp/build/* dist/ 2>/dev/null || true
+            
+            systemctl restart nginx
+            
+            cd ../server
+            npm install
+            pm2 restart shinomontazh-backend || pm2 start index.js --name shinomontazh-backend
