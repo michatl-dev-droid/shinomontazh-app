@@ -5,14 +5,14 @@ const PriceList = () => {
   const [activeSubType, setActiveSubType] = useState('standard');
   const [radiusFilter, setRadiusFilter] = useState('all');
 
-  // Данные прайс-листа на основе вашего файла
+  // Данные прайс-листа
   const priceData = {
     // ЛЕГКОВЫЕ (passenger)
     passenger: {
       standard: {
         name: 'Легковые (стандарт)',
         description: 'Обычные легковые шины',
-        bgColor: '#fff9e6', // бледно-желтый
+        bgColor: '#fff9e6',
         radiuses: [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
         services: [
           { name: 'Съём + шиномонтаж + балансировка + установка', prices: [850, 850, 850, 950, 1140, 1140, 1300, 1620, 1860, 2260, 3060, 3860] },
@@ -29,7 +29,7 @@ const PriceList = () => {
       runflat: {
         name: 'Легковые RFT / низкий профиль',
         description: 'RunFlat и низкопрофильные шины',
-        bgColor: '#fff9e6', // бледно-желтый
+        bgColor: '#fff9e6',
         radiuses: [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
         services: [
           { name: 'Съём + шиномонтаж + балансировка + установка', prices: [1070, 1070, 1070, 1170, 1380, 1380, 1540, 1860, 2100, 2500, 3300, 4100] },
@@ -44,7 +44,7 @@ const PriceList = () => {
       standard: {
         name: 'Кроссоверы / Внедорожники',
         description: 'Обычные шины для кроссоверов',
-        bgColor: '#e6f3ff', // бледно-синий
+        bgColor: '#e6f3ff',
         radiuses: [16, 17, 18, 19, 20, 21, 22, 23, 24],
         services: [
           { name: 'Съём + шиномонтаж + балансировка + установка', prices: [1000, 1250, 1250, 1500, 1620, 2000, 2500, 3100, 3900] },
@@ -61,7 +61,7 @@ const PriceList = () => {
       runflat: {
         name: 'Кроссоверы RFT / низкий профиль',
         description: 'RunFlat и низкопрофильные шины',
-        bgColor: '#e6f3ff', // бледно-синий
+        bgColor: '#e6f3ff',
         radiuses: [16, 17, 18, 19, 20, 21, 22, 23, 24],
         services: [
           { name: 'Съём + шиномонтаж + балансировка + установка', prices: [1280, 1530, 1530, 1780, 1900, 2280, 2780, 3380, 4180] },
@@ -71,10 +71,10 @@ const PriceList = () => {
       }
     },
 
-    // МГТ (отдельная категория)
+    // МГТ
     mgt: {
       name: 'МГТ',
-      bgColor: '#f5f5f5', // светло-серый
+      bgColor: '#f5f5f5',
       services: [
         { name: 'Съём + шиномонтаж + балансировка + установка', price: 1500 },
         { name: 'Съём + балансировка + установка', price: 1000 },
@@ -88,7 +88,7 @@ const PriceList = () => {
       ]
     },
 
-    // РЕМОНТ ШИН (отдельная категория)
+    // РЕМОНТ ШИН
     repair: {
       name: 'Ремонт шин',
       bgColor: '#f5f5f5',
@@ -107,7 +107,7 @@ const PriceList = () => {
       ]
     },
 
-    // ТОВАРЫ (отдельная категория)
+    // ТОВАРЫ
     goods: {
       name: 'Товары',
       bgColor: '#f5f5f5',
@@ -119,7 +119,7 @@ const PriceList = () => {
       ]
     },
 
-    // ДОПОЛНИТЕЛЬНЫЕ РАБОТЫ (отдельная категория)
+    // ДОПОЛНИТЕЛЬНЫЕ РАБОТЫ
     extra: {
       name: 'Дополнительные работы',
       bgColor: '#f5f5f5',
@@ -138,7 +138,6 @@ const PriceList = () => {
     }
   };
 
-  // Получаем текущие данные в зависимости от выбранной категории
   const getCurrentData = () => {
     if (activeType === 'passenger') return priceData.passenger[activeSubType];
     if (activeType === 'suv') return priceData.suv[activeSubType];
@@ -147,7 +146,6 @@ const PriceList = () => {
 
   const currentData = getCurrentData();
 
-  // Фильтрация радиусов
   const getFilteredRadiuses = () => {
     if (!currentData) return [];
     if (radiusFilter === 'all') return currentData.radiuses;
@@ -158,111 +156,105 @@ const PriceList = () => {
 
   return (
     <div className="price-list">
-      {/* Основные фильтры - все кнопки на одном уровне */}
-      <div className="filters">
-        <button 
-          className={activeType === 'passenger' ? 'active passenger' : ''}
-          onClick={() => { setActiveType('passenger'); setActiveSubType('standard'); setRadiusFilter('all'); }}
-        >
-          Легковые
-        </button>
-        <button 
-          className={activeType === 'suv' ? 'active suv' : ''}
-          onClick={() => { setActiveType('suv'); setActiveSubType('standard'); setRadiusFilter('all'); }}
-        >
-          Кроссоверы / Внедорожники
-        </button>
-        <button 
-          className={activeType === 'mgt' ? 'active' : ''}
-          onClick={() => { setActiveType('mgt'); setRadiusFilter('all'); }}
-        >
-          МГТ
-        </button>
-        <button 
-          className={activeType === 'repair' ? 'active' : ''}
-          onClick={() => { setActiveType('repair'); setRadiusFilter('all'); }}
-        >
-          Ремонт шин
-        </button>
-        <button 
-          className={activeType === 'goods' ? 'active' : ''}
-          onClick={() => { setActiveType('goods'); setRadiusFilter('all'); }}
-        >
-          Товары
-        </button>
-        <button 
-          className={activeType === 'extra' ? 'active' : ''}
-          onClick={() => { setActiveType('extra'); setRadiusFilter('all'); }}
-        >
-          Доп. работы
-        </button>
+      <h1>Цены</h1>
+
+      {/* Блок 1 - Основные фильтры */}
+      <div className="filter-section">
+        <h3>Категории услуг</h3>
+        <div className="filters">
+          <button 
+            className={activeType === 'passenger' ? 'active passenger' : ''}
+            onClick={() => { setActiveType('passenger'); setActiveSubType('standard'); setRadiusFilter('all'); }}
+          >
+            Легковые
+          </button>
+          <button 
+            className={activeType === 'suv' ? 'active suv' : ''}
+            onClick={() => { setActiveType('suv'); setActiveSubType('standard'); setRadiusFilter('all'); }}
+          >
+            Кроссоверы / Внедорожники
+          </button>
+          <button 
+            className={activeType === 'mgt' ? 'active' : ''}
+            onClick={() => { setActiveType('mgt'); setRadiusFilter('all'); }}
+          >
+            МГТ
+          </button>
+          <button 
+            className={activeType === 'repair' ? 'active' : ''}
+            onClick={() => { setActiveType('repair'); setRadiusFilter('all'); }}
+          >
+            Ремонт шин
+          </button>
+          <button 
+            className={activeType === 'goods' ? 'active' : ''}
+            onClick={() => { setActiveType('goods'); setRadiusFilter('all'); }}
+          >
+            Товары
+          </button>
+          <button 
+            className={activeType === 'extra' ? 'active' : ''}
+            onClick={() => { setActiveType('extra'); setRadiusFilter('all'); }}
+          >
+            Доп. работы
+          </button>
+        </div>
       </div>
 
-      {/* Подкатегории для легковых и кроссоверов */}
+      {/* Блок 2 - Тип шин (только для легковых и кроссоверов) */}
       {(activeType === 'passenger' || activeType === 'suv') && (
-        <div className="sub-filters-container" style={{ 
-          marginTop: '10px', 
-          padding: '15px', 
-          borderRadius: '8px',
-          backgroundColor: activeType === 'passenger' ? '#fff9e6' : '#e6f3ff'
-        }}>
-          {/* Текстовое поле над кнопками (выровнено по левому краю) */}
-          <div style={{ 
-            color: 'red', 
-            fontWeight: 'bold',
-            fontSize: '16px',
-            textTransform: 'uppercase',
-            marginBottom: '10px',
-            textAlign: 'left'
+        <div className="filter-section">
+          <h3>Тип шин</h3>
+          <div className="sub-filters-container" style={{ 
+            marginTop: '10px', 
+            padding: '10px', 
+            borderRadius: '8px',
+            backgroundColor: activeType === 'passenger' ? '#fff9e6' : '#e6f3ff'
           }}>
-            ⬇ ВЫБРАТЬ ТИП ШИН ⬇
-          </div>
-          
-          <div className="sub-filters" style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-            <button 
-              className={activeSubType === 'standard' ? 'active' : ''}
-              onClick={() => setActiveSubType('standard')}
-            >
-              Обычные шины
-            </button>
-            <button 
-              className={activeSubType === 'runflat' ? 'active' : ''}
-              onClick={() => setActiveSubType('runflat')}
-            >
-              RFT / Низкий профиль
-            </button>
+            <div className="sub-filters" style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+              <button 
+                className={activeSubType === 'standard' ? 'active' : ''}
+                onClick={() => setActiveSubType('standard')}
+              >
+                Обычные шины
+              </button>
+              <button 
+                className={activeSubType === 'runflat' ? 'active' : ''}
+                onClick={() => setActiveSubType('runflat')}
+              >
+                RFT / Низкий профиль
+              </button>
+            </div>
           </div>
         </div>
       )}
 
-      {/* Фильтр по радиусу (только для легковых и кроссоверов) */}
+      {/* Блок 3 - Фильтр по радиусу */}
       {(activeType === 'passenger' || activeType === 'suv') && currentData && (
-        <div className="radius-filter" style={{ 
-          marginTop: '15px',
-          padding: '10px',
-          backgroundColor: '#f8f9fa',
-          borderRadius: '8px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '10px',
-          flexWrap: 'wrap'
-        }}>
-          <span style={{ fontWeight: 'bold', color: '#333' }}>Фильтр по радиусу:</span>
-          <button 
-            className={`radius-btn ${radiusFilter === 'all' ? 'active' : ''}`}
-            onClick={() => setRadiusFilter('all')}
-          >
-            Все
-          </button>
-          {currentData.radiuses.map(radius => (
-            <button
-              key={radius}
-              className={`radius-btn ${radiusFilter === radius.toString() ? 'active' : ''}`}
-              onClick={() => setRadiusFilter(radius.toString())}
+        <div className="filter-section">
+          <h3>Фильтр по радиусу</h3>
+          <div className="radius-filter" style={{ 
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+            flexWrap: 'wrap'
+          }}>
+            <button 
+              className={`radius-btn ${radiusFilter === 'all' ? 'active' : ''}`}
+              onClick={() => setRadiusFilter('all')}
             >
-              R{radius}
+              Все
             </button>
-          ))}
+            {currentData.radiuses.map(radius => (
+              <button
+                key={radius}
+                className={`radius-btn ${radiusFilter === radius.toString() ? 'active' : ''}`}
+                onClick={() => setRadiusFilter(radius.toString())}
+              >
+                R{radius}
+              </button>
+            ))}
+          </div>
         </div>
       )}
 
@@ -273,7 +265,6 @@ const PriceList = () => {
           <div className="card" style={{ backgroundColor: priceData.passenger[activeSubType].bgColor }}>
             <h2>{priceData.passenger[activeSubType].name}</h2>
             <p style={{ color: '#666', marginBottom: '20px' }}>{priceData.passenger[activeSubType].description}</p>
-            
             <div style={{ overflowX: 'auto' }}>
               <table className="price-table">
                 <thead>
@@ -282,17 +273,16 @@ const PriceList = () => {
                     {filteredRadiuses.map(radius => (
                       <th key={radius}>R{radius}</th>
                     ))}
-                  </tr>
-                </thead>
+                  </thead>
                 <tbody>
-                  {priceData.passenger[activeSubType].services.map((service, index) => (
-                    <tr key={index}>
+                  {priceData.passenger[activeSubType].services.map((service, idx) => (
+                    <tr key={idx}>
                       <td>{service.name}</td>
                       {filteredRadiuses.map((radius, i) => {
                         const radiusIndex = priceData.passenger[activeSubType].radiuses.indexOf(radius);
                         return (
                           <td key={i}>
-                            {service.prices[radiusIndex] || '—'}
+                            {service.prices[radiusIndex] !== null ? `${service.prices[radiusIndex]} ₽` : '—'}
                           </td>
                         );
                       })}
@@ -309,7 +299,6 @@ const PriceList = () => {
           <div className="card" style={{ backgroundColor: priceData.suv[activeSubType].bgColor }}>
             <h2>{priceData.suv[activeSubType].name}</h2>
             <p style={{ color: '#666', marginBottom: '20px' }}>{priceData.suv[activeSubType].description}</p>
-            
             <div style={{ overflowX: 'auto' }}>
               <table className="price-table">
                 <thead>
@@ -318,17 +307,16 @@ const PriceList = () => {
                     {filteredRadiuses.map(radius => (
                       <th key={radius}>R{radius}</th>
                     ))}
-                  </tr>
-                </thead>
+                  </thead>
                 <tbody>
-                  {priceData.suv[activeSubType].services.map((service, index) => (
-                    <tr key={index}>
+                  {priceData.suv[activeSubType].services.map((service, idx) => (
+                    <tr key={idx}>
                       <td>{service.name}</td>
                       {filteredRadiuses.map((radius, i) => {
                         const radiusIndex = priceData.suv[activeSubType].radiuses.indexOf(radius);
                         return (
                           <td key={i}>
-                            {service.prices[radiusIndex] || '—'}
+                            {service.prices[radiusIndex] !== null ? `${service.prices[radiusIndex]} ₽` : '—'}
                           </td>
                         );
                       })}
@@ -349,13 +337,12 @@ const PriceList = () => {
                 <tr>
                   <th>Услуга</th>
                   <th>Цена</th>
-                </tr>
-              </thead>
+                </thead>
               <tbody>
-                {priceData.mgt.services.map((service, index) => (
-                  <tr key={index}>
+                {priceData.mgt.services.map((service, idx) => (
+                  <tr key={idx}>
                     <td>{service.name}</td>
-                    <td>{service.price || '—'}</td>
+                    <td>{service.price !== null ? `${service.price} ₽` : '—'}</td>
                   </tr>
                 ))}
               </tbody>
@@ -372,13 +359,12 @@ const PriceList = () => {
                 <tr>
                   <th>Услуга</th>
                   <th>Цена</th>
-                </tr>
-              </thead>
+                </thead>
               <tbody>
-                {priceData.repair.services.map((service, index) => (
-                  <tr key={index}>
+                {priceData.repair.services.map((service, idx) => (
+                  <tr key={idx}>
                     <td>{service.name}</td>
-                    <td>{service.price}</td>
+                    <td>{service.price} ₽</td>
                   </tr>
                 ))}
               </tbody>
@@ -395,13 +381,12 @@ const PriceList = () => {
                 <tr>
                   <th>Услуга</th>
                   <th>Цена</th>
-                </tr>
-              </thead>
+                </thead>
               <tbody>
-                {priceData.goods.services.map((service, index) => (
-                  <tr key={index}>
+                {priceData.goods.services.map((service, idx) => (
+                  <tr key={idx}>
                     <td>{service.name}</td>
-                    <td>{service.price}</td>
+                    <td>{service.price} ₽</td>
                   </tr>
                 ))}
               </tbody>
@@ -418,13 +403,12 @@ const PriceList = () => {
                 <tr>
                   <th>Услуга</th>
                   <th>Цена</th>
-                </tr>
-              </thead>
+                </thead>
               <tbody>
-                {priceData.extra.services.map((service, index) => (
-                  <tr key={index}>
+                {priceData.extra.services.map((service, idx) => (
+                  <tr key={idx}>
                     <td>{service.name}</td>
-                    <td>{service.price}</td>
+                    <td>{service.price} ₽</td>
                   </tr>
                 ))}
               </tbody>
@@ -485,17 +469,6 @@ const PriceList = () => {
           border-color: #1976D2;
         }
 
-        .radius-filter {
-          margin-top: 15px;
-          padding: 10px;
-          background-color: #f8f9fa;
-          border-radius: 8px;
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          flex-wrap: wrap;
-        }
-
         .radius-btn {
           padding: 5px 10px;
           border: 1px solid #ddd;
@@ -505,15 +478,28 @@ const PriceList = () => {
           transition: all 0.3s;
           font-size: 14px;
         }
-
         .radius-btn:hover {
           background: #e0e0e0;
         }
-
         .radius-btn.active {
           background: #2196F3;
           color: white;
           border-color: #1976D2;
+        }
+
+        .filter-section {
+          border: 1px solid #ddd;
+          border-radius: 12px;
+          padding: 15px;
+          margin-bottom: 20px;
+          background-color: #fafafa;
+        }
+        .filter-section h3 {
+          margin-top: 0;
+          margin-bottom: 15px;
+          font-size: 16px;
+          color: #333;
+          font-weight: 500;
         }
 
         .price-table {
@@ -540,10 +526,6 @@ const PriceList = () => {
           box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         @media (max-width: 768px) {
-          .gradient-title {
-            font-size: 1.8rem;
-            padding: 15px;
-          }
           .price-table {
             font-size: 14px;
           }
