@@ -69,7 +69,7 @@ const Register = () => {
     setError('');
 
     try {
-      const response = await axios.post('http://87.249.44.239:5000/api/auth/register', {
+      const response = await axios.post(':5000/api/auth/register', {
         phone: formData.phone,
         password: formData.password,
         name: formData.name,

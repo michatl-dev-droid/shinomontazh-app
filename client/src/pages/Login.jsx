@@ -51,7 +51,7 @@ const Login = () => {
     const formattedPhone = formatPhoneNumber(phone);
 
     try {
-      const response = await axios.post('http://87.249.44.239:5000/api/auth/login', {
+      const response = await axios.post(':5000/api/auth/login', {
         phone: formattedPhone,
         password
       });
