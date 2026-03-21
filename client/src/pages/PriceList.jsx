@@ -31,7 +31,7 @@ const PriceList = () => {
             Легковые
           </button>
           <button className={`${activeType === 'suv' ? 'active suv' : ''}`} onClick={() => setActiveType('suv')}>
-            Кроссоверы / Внедорожники
+            SUV / Внедорожники
           </button>
           <button className={`${activeType === 'mgt' ? 'active' : ''}`} onClick={() => setActiveType('mgt')}>
             МГТ

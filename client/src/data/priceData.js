@@ -40,7 +40,7 @@ export const priceData = {
   // КРОССОВЕРЫ
   suv: {
     standard: {
-      name: 'Кроссоверы / Внедорожники',
+      name: 'SUV/ Внедорожники',
       description: 'Обычные шины для кроссоверов',
       bgColor: '#e6f3ff',
       radiuses: [16, 17, 18, 19, 20, 21, 22, 23, 24],
