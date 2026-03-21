@@ -11,7 +11,7 @@ const AdminAppointments = () => {
     try {
       setLoading(true);
       console.log('📥 Загружаем записи...');
-      const response = await axios.get('http://localhost:5000/api/appointments');
+      const response = await axios.get('http:///87.249.44.239:5000/api/appointments');
       console.log('✅ Получены записи:', response.data);
       setAppointments(response.data);
       setError('');
@@ -29,7 +29,7 @@ const AdminAppointments = () => {
 
   const updateStatus = async (id, status) => {
     try {
-      await axios.put(`http://localhost:5000/api/appointments/${id}`, { status });
+      await axios.put(`http:///87.249.44.239:5000/api/appointments/${id}`, { status });
       // После обновления сразу перезагружаем список
       await fetchAppointments();
     } catch (err) {

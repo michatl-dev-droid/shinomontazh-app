@@ -19,7 +19,7 @@ const AdminServicePoints = () => {
 
   const fetchPoints = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/service-points');
+      const response = await axios.get('http:///87.249.44.239:5000/api/service-points');
       setPoints(response.data);
     } catch (err) {
       console.error('Ошибка загрузки точек:', err);
@@ -47,9 +47,9 @@ const AdminServicePoints = () => {
     e.preventDefault();
     try {
       if (editingId) {
-        await axios.put(`http://localhost:5000/api/service-points/${editingId}`, formData);
+        await axios.put(`http:///87.249.44.239:5000/api/service-points/${editingId}`, formData);
       } else {
-        await axios.post('http://localhost:5000/api/service-points', formData);
+        await axios.post('http:///87.249.44.239:5000/api/service-points', formData);
       }
       setFormData({ name: '', address: '', phone: '', workingHours: '', coordinates: { lat: 55.751574, lng: 37.573856 } });
       setEditingId(null);
@@ -73,7 +73,7 @@ const AdminServicePoints = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Удалить точку?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/service-points/${id}`);
+        await axios.delete(`http:///87.249.44.239:5000/api/service-points/${id}`);
         fetchPoints();
       } catch (err) {
         console.error('Ошибка удаления:', err);

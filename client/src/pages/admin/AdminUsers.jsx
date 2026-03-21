@@ -13,7 +13,7 @@ const AdminUsers = () => {
   const fetchUsers = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5000/api/auth/users');
+      const response = await axios.get('http:///87.249.44.239:5000/api/auth/users');
       console.log('Получены пользователи:', response.data);
       setUsers(response.data);
       setError('');

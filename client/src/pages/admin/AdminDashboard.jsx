@@ -17,10 +17,10 @@ const AdminDashboard = () => {
   const fetchStats = async () => {
     try {
       const [services, points, appointments, users] = await Promise.all([
-        axios.get('http://localhost:5000/api/services'),
-        axios.get('http://localhost:5000/api/service-points'),
-        axios.get('http://localhost:5000/api/appointments'),
-        axios.get('http://localhost:5000/api/auth/users')
+        axios.get('http:///87.249.44.239:5000/api/services'),
+        axios.get('http:///87.249.44.239:5000/api/service-points'),
+        axios.get('http://l/87.249.44.239:5000/api/appointments'),
+        axios.get('http:///87.249.44.239:5000/api/auth/users')
       ]);
       
       setStats({

@@ -17,7 +17,7 @@ const AdminServices = () => {
 
   const fetchServices = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/services');
+      const response = await axios.get('http:///87.249.44.239:5000/api/services');
       setServices(response.data);
     } catch (err) {
       console.error('Ошибка загрузки:', err);
@@ -35,9 +35,9 @@ const AdminServices = () => {
     e.preventDefault();
     try {
       if (editingId) {
-        await axios.put(`http://localhost:5000/api/services/${editingId}`, formData);
+        await axios.put(`http:///87.249.44.239:5000/api/services/${editingId}`, formData);
       } else {
-        await axios.post('http://localhost:5000/api/services', formData);
+        await axios.post('http:///87.249.44.239:5000/api/services', formData);
       }
       setFormData({ name: '', category: '', price: '', carType: 'passenger' });
       setEditingId(null);
@@ -60,7 +60,7 @@ const AdminServices = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Удалить услугу?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/services/${id}`);
+        await axios.delete(`http:///87.249.44.239:5000/api/services/${id}`);
         fetchServices();
       } catch (err) {
         console.error('Ошибка удаления:', err);
