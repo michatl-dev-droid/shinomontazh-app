@@ -14,19 +14,25 @@ const Login = () => {
     // Удаляем все нецифровые символы
     const numbers = value.replace(/\D/g, '');
     
-    // Если начинается с 8, заменяем на +7
-    if (numbers.startsWith('8')) {
-      return '+7' + numbers.slice(1);
-    }
-    // Если 10 цифр и начинается с 9, добавляем +7
-    if (numbers.startsWith('9') && numbers.length === 10) {
-      return '+7' + numbers;
+    // Если номер не пустой
+    if (numbers.length > 0) {
+      // Если начинается с 8, заменяем на +7
+      if (numbers.startsWith('8')) {
+        return '+7' + numbers.slice(1);
+      }
+      // Если 10 цифр и начинается с 9, добавляем +7
+      if (numbers.startsWith('9') && numbers.length === 10) {
+        return '+7' + numbers;
+      }
+      // Если начинается с 7 и длина 11, добавляем +
+      if (numbers.startsWith('7') && numbers.length === 11) {
+        return '+' + numbers;
+      }
     }
     // Если уже есть +7, оставляем как есть
     if (value.startsWith('+7')) {
       return value;
     }
-    // Иначе возвращаем как есть
     return value;
   };
 
@@ -41,9 +47,12 @@ const Login = () => {
     setLoading(true);
     setError('');
 
+    // Форматируем номер перед отправкой (на всякий случай)
+    const formattedPhone = formatPhoneNumber(phone);
+
     try {
       const response = await axios.post('http://87.249.44.239:5000/api/auth/login', {
-        phone,
+        phone: formattedPhone,
         password
       });
       
@@ -92,6 +101,9 @@ const Login = () => {
               required
               disabled={loading}
             />
+            <small style={{ color: '#666', fontSize: '12px' }}>
+              Введите номер в формате 9123456789 или +79123456789
+            </small>
           </div>
 
           <div className="form-group">
