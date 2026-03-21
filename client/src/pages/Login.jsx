@@ -10,9 +10,33 @@ const Login = () => {
   
   const navigate = useNavigate();
 
+  const formatPhoneNumber = (value) => {
+    // Удаляем все нецифровые символы
+    const numbers = value.replace(/\D/g, '');
+    
+    // Если начинается с 8, заменяем на +7
+    if (numbers.startsWith('8')) {
+      return '+7' + numbers.slice(1);
+    }
+    // Если 10 цифр и начинается с 9, добавляем +7
+    if (numbers.startsWith('9') && numbers.length === 10) {
+      return '+7' + numbers;
+    }
+    // Если уже есть +7, оставляем как есть
+    if (value.startsWith('+7')) {
+      return value;
+    }
+    // Иначе возвращаем как есть
+    return value;
+  };
+
+  const handlePhoneChange = (e) => {
+    const formatted = formatPhoneNumber(e.target.value);
+    setPhone(formatted);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Попытка входа:', phone);
     
     setLoading(true);
     setError('');
@@ -24,7 +48,7 @@ const Login = () => {
       });
       
       console.log('Ответ сервера:', response.data);
-      // ДОБАВЬТЕ ЭТУ СТРОКУ:
+      
       alert('Вход выполнен успешно! Добро пожаловать.');
       
       localStorage.setItem('token', response.data.token);
@@ -63,7 +87,7 @@ const Login = () => {
             <input
               type="tel"
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={handlePhoneChange}
               placeholder="+7 (999) 123-45-67"
               required
               disabled={loading}

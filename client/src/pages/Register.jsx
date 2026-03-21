@@ -16,21 +16,52 @@ const Register = () => {
   
   const navigate = useNavigate();
 
+  const formatPhoneNumber = (value) => {
+    // Удаляем все нецифровые символы
+    const numbers = value.replace(/\D/g, '');
+    
+    // Если начинается с 8, заменяем на +7
+    if (numbers.startsWith('8')) {
+      return '+7' + numbers.slice(1);
+    }
+    // Если 10 цифр и начинается с 9, добавляем +7
+    if (numbers.startsWith('9') && numbers.length === 10) {
+      return '+7' + numbers;
+    }
+    // Если уже есть +7, оставляем как есть
+    if (value.startsWith('+7')) {
+      return value;
+    }
+    // Если уже есть +7 с пробелами
+    if (value.startsWith('+7')) {
+      return '+7' + numbers.slice(2);
+    }
+    // Иначе возвращаем как есть
+    return value;
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    
+    // Для телефона применяем форматирование
+    if (name === 'phone') {
+      const formatted = formatPhoneNumber(value);
+      setFormData(prev => ({ ...prev, [name]: formatted }));
+    } else {
+      setFormData(prev => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Форма отправлена', formData); // Для отладки
     
-    // Проверка совпадения паролей
     if (formData.password !== formData.confirmPassword) {
       setError('Пароли не совпадают');
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      setError('Пароль должен содержать минимум 6 символов');
       return;
     }
 
@@ -39,22 +70,21 @@ const Register = () => {
 
     try {
       const response = await axios.post('http://87.249.44.239:5000/api/auth/register', {
-  phone: formData.phone,
-  password: formData.password,
-  name: formData.name,
-  carModel: formData.carModel,
-  carNumber: formData.carNumber
-});
-
-console.log('Ответ сервера:', response.data);
-
-// ДОБАВЬТЕ ЭТУ СТРОКУ:
-alert('Регистрация успешна! Теперь вы можете войти.');
-
-localStorage.setItem('token', response.data.token);
-localStorage.setItem('user', JSON.stringify(response.data.user));
-
-navigate('/price-list');
+        phone: formData.phone,
+        password: formData.password,
+        name: formData.name,
+        carModel: formData.carModel,
+        carNumber: formData.carNumber
+      });
+      
+      console.log('Ответ сервера:', response.data);
+      
+      alert('Регистрация успешна! Теперь вы можете войти.');
+      
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+      
+      navigate('/price-list');
       
     } catch (err) {
       console.error('Ошибка регистрации:', err);
@@ -93,6 +123,9 @@ navigate('/price-list');
               required
               disabled={loading}
             />
+            <small style={{ color: '#666', fontSize: '12px' }}>
+              Введите номер в формате 9123456789 или +79123456789
+            </small>
           </div>
 
           <div className="form-group">
@@ -161,7 +194,7 @@ navigate('/price-list');
             type="submit" 
             className="btn btn-primary" 
             style={{ 
-              width: '100%', 
+              width: '100%',
               padding: '12px',
               fontSize: '16px',
               backgroundColor: '#2196F3',
