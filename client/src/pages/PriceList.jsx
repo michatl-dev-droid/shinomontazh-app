@@ -276,14 +276,14 @@ const PriceList = () => {
   }
 
   /* Мобильная адаптация */
-  @media (max-width: 768px) {
-    .price-table {
-      font-size: 13px;
-    }
-    .price-table th,
-    .price-table td {
-      padding: 8px 6px;
-    }
+ @media (max-width: 768px) {
+  .price-table {
+    font-size: 14px;  /* увеличено с 13px */
+  }
+  .price-table th,
+  .price-table td {
+    padding: 10px 8px;  /* увеличено */
+  }
     .filters button {
       padding: 6px 12px;
       font-size: 13px;
