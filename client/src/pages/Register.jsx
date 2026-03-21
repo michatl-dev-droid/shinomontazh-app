@@ -39,21 +39,22 @@ const Register = () => {
 
     try {
       const response = await axios.post('http://87.249.44.239:5000/api/auth/register', {
-        phone: formData.phone,
-        password: formData.password,
-        name: formData.name,
-        carModel: formData.carModel,
-        carNumber: formData.carNumber
-      });
-      
-      console.log('Ответ сервера:', response.data);
-      
-      // Сохраняем данные пользователя
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('user', JSON.stringify(response.data.user));
-      
-      // Перенаправляем на главную
-      navigate('/price-list');
+  phone: formData.phone,
+  password: formData.password,
+  name: formData.name,
+  carModel: formData.carModel,
+  carNumber: formData.carNumber
+});
+
+console.log('Ответ сервера:', response.data);
+
+// ДОБАВЬТЕ ЭТУ СТРОКУ:
+alert('Регистрация успешна! Теперь вы можете войти.');
+
+localStorage.setItem('token', response.data.token);
+localStorage.setItem('user', JSON.stringify(response.data.user));
+
+navigate('/price-list');
       
     } catch (err) {
       console.error('Ошибка регистрации:', err);

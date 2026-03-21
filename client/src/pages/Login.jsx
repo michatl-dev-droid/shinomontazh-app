@@ -24,6 +24,8 @@ const Login = () => {
       });
       
       console.log('Ответ сервера:', response.data);
+      // ДОБАВЬТЕ ЭТУ СТРОКУ:
+      alert('Вход выполнен успешно! Добро пожаловать.');
       
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.user));
