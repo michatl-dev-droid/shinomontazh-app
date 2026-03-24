@@ -24,23 +24,21 @@ function App() {
         <Navbar />
         <div className="container">
           <Routes>
-            <Route path="/" element={<PriceList />} />
             <Route path="/" element={<Home />} />
-            <Route path="/price-list" element={<PriceList />} />
-            <Route path="/price-list" element={<PriceList />} />
-            <Route path="/service-points" element={<ServicePoints />} />
-            <Route path="/map" element={<Map />} />
-            <Route path="/appointment" element={<Appointment />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            
-            {/* Маршруты админки */}
-            <Route path="/admin/login" element={<AdminLogin />} />
-            <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
-            <Route path="/admin/services" element={<AdminRoute><AdminServices /></AdminRoute>} />
-            <Route path="/admin/service-points" element={<AdminRoute><AdminServicePoints /></AdminRoute>} />
-            <Route path="/admin/appointments" element={<AdminRoute><AdminAppointments /></AdminRoute>} />
-            <Route path="/admin/users" element={<AdminRoute><AdminUsers /></AdminRoute>} />
+  <Route path="/price-list" element={<PriceList />} />
+  <Route path="/service-points" element={<ServicePoints />} />
+  <Route path="/map" element={<Map />} />
+  <Route path="/appointment" element={<Appointment />} />
+  <Route path="/login" element={<Login />} />
+  <Route path="/register" element={<Register />} />
+  
+  {/* Маршруты админки */}
+  <Route path="/admin/login" element={<AdminLogin />} />
+  <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
+  <Route path="/admin/services" element={<AdminRoute><AdminServices /></AdminRoute>} />
+  <Route path="/admin/service-points" element={<AdminRoute><AdminServicePoints /></AdminRoute>} />
+  <Route path="/admin/appointments" element={<AdminRoute><AdminAppointments /></AdminRoute>} />
+  <Route path="/admin/users" element={<AdminRoute><AdminUsers /></AdminRoute>} />
           </Routes>
         </div>
       </div>
