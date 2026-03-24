@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import Home from './pages/Home';
 import PriceList from './pages/PriceList';
 import ServicePoints from './pages/ServicePoints';
 import Map from './pages/Map';
@@ -24,6 +25,8 @@ function App() {
         <div className="container">
           <Routes>
             <Route path="/" element={<PriceList />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/price-list" element={<PriceList />} />
             <Route path="/price-list" element={<PriceList />} />
             <Route path="/service-points" element={<ServicePoints />} />
             <Route path="/map" element={<Map />} />
