@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import AdminCoupons from './pages/admin/AdminCoupons';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import PriceList from './pages/PriceList';
@@ -26,6 +27,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
   <Route path="/price-list" element={<PriceList />} />
+  <Route path="/admin/coupons" element={<AdminRoute><AdminCoupons /></AdminRoute>} />
   <Route path="/service-points" element={<ServicePoints />} />
   <Route path="/map" element={<Map />} />
   <Route path="/appointment" element={<Appointment />} />
