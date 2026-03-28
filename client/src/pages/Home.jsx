@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { requestNotificationPermission, sendCouponNotification } from '../utils/push';
 
 const Home = () => {
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
   const [notifying, setNotifying] = useState(false);
+
+  // Проверяем разрешение при загрузке
+  useEffect(() => {
+    if (Notification.permission === 'granted') {
+      setNotificationsEnabled(true);
+    }
+  }, []);
 
   const enableNotifications = async () => {
     const granted = await requestNotificationPermission();
@@ -15,11 +22,8 @@ const Home = () => {
   };
 
   const sendTestCoupon = () => {
-    if (notificationsEnabled) {
-      sendCouponNotification('WELCOME10', 10);
-    } else {
-      alert('🔔 Сначала включите уведомления');
-    }
+    sendCouponNotification('TEST10', 10);
+    alert('🔔 Тестовое уведомление отправлено!');
   };
 
   return (
@@ -40,16 +44,10 @@ const Home = () => {
           </button>
         )}
         
-        {/* Кнопка тестового уведомления */}
-        {notificationsEnabled && (
-          <button onClick={sendTestCoupon} className="btn-test">
-            📱 Тестовое уведомление о купоне
-          </button>
-          {/* Всегда показывать кнопку для теста */}
-<button onClick={sendTestCoupon} className="btn-test">
-  📱 Тестовое уведомление о купоне
-</button>
-        )}
+        {/* Тестовая кнопка уведомлений — всегда видна */}
+        <button onClick={sendTestCoupon} className="btn-test" style={{ marginTop: '15px' }}>
+          📱 Тестовое уведомление о купоне
+        </button>
       </div>
 
       {/* Преимущества */}
@@ -90,7 +88,6 @@ const Home = () => {
           padding: 20px;
         }
 
-        /* Hero секция */
         .hero {
           text-align: center;
           padding: 60px 20px;
@@ -157,7 +154,6 @@ const Home = () => {
           opacity: 0.9;
         }
 
-        /* Преимущества */
         .features {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -189,7 +185,6 @@ const Home = () => {
           line-height: 1.5;
         }
 
-        /* CTA секция */
         .cta {
           text-align: center;
           padding: 50px 20px;
@@ -218,7 +213,6 @@ const Home = () => {
           background: #6a0000;
         }
 
-        /* Мобильная версия */
         @media (max-width: 768px) {
           .hero h1 {
             font-size: 1.8rem;
