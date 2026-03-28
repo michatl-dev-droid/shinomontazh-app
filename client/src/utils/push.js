@@ -1,32 +1,19 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
 import { getMessaging, getToken, onMessage } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-messaging.js';
 
-// ВСТАВЬТЕ ВАШИ ДАННЫЕ ИЗ FIREBASE
 const firebaseConfig = {
   apiKey: "ВАШ_API_KEY",
-  authDomain: "ВАШ_AUTH_DOMAIN",
-  projectId: "ВАШ_PROJECT_ID",
-  storageBucket: "ВАШ_STORAGE_BUCKET",
-  messagingSenderId: "ВАШ_MESSAGING_SENDER_ID",
+  authDomain: "shinomontazh-push.firebaseapp.com",
+  projectId: "shinomontazh-push",
+  storageBucket: "shinomontazh-push.firebasestorage.app",
+  messagingSenderId: "1010670762660",
   appId: "ВАШ_APP_ID"
 };
 
-// VAPID ключ из Firebase (Cloud Messaging)
-const VAPID_KEY = "ВАШ_VAPID_КЛЮЧ";
+const VAPID_KEY = "BEeNJ_dIFRD12d1ErRNcOn4uOUVr2qplTo2okPzbI5pRkQ5f9dyq3nfqEo9Er3AKRzY7lSUq-FErp3FZiCDwc-M";
 
 let messaging = null;
-let token = null;
 
-// Инициализация Firebase
-export function initFirebase() {
-  if (!messaging) {
-    const app = initializeApp(firebaseConfig);
-    messaging = getMessaging(app);
-  }
-  return messaging;
-}
-
-// Запрос разрешения и получение токена
 export async function requestNotificationPermission() {
   if (!('Notification' in window)) {
     alert('Ваш браузер не поддерживает уведомления');
@@ -34,36 +21,29 @@ export async function requestNotificationPermission() {
   }
   
   const permission = await Notification.requestPermission();
-  if (permission !== 'granted') {
-    alert('Уведомления не разрешены');
-    return false;
-  }
+  if (permission !== 'granted') return false;
   
   try {
-    initFirebase();
+    const app = initializeApp(firebaseConfig);
+    messaging = getMessaging(app);
     
-    // Регистрируем service worker
     const registration = await navigator.serviceWorker.register('/firebase-messaging-sw.js');
-    console.log('Service Worker зарегистрирован');
     
-    // Получаем токен
-    token = await getToken(messaging, {
+    const token = await getToken(messaging, {
       vapidKey: VAPID_KEY,
       serviceWorkerRegistration: registration
     });
     
     console.log('FCM Token:', token);
     
-    // Сохраняем токен на сервере
     await fetch('/api/push/subscribe', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ token, type: 'firebase' })
     });
     
-    // Слушаем уведомления, когда сайт открыт
     onMessage(messaging, (payload) => {
-      console.log('Получено уведомление:', payload);
+      console.log('Уведомление:', payload);
       new Notification(payload.notification.title, {
         body: payload.notification.body,
         icon: '/favicon.svg'
@@ -73,12 +53,10 @@ export async function requestNotificationPermission() {
     return true;
   } catch (err) {
     console.error('Ошибка:', err);
-    alert('Ошибка подключения уведомлений');
     return false;
   }
 }
 
-// Отправка тестового уведомления (через сервер)
 export async function sendTestNotification() {
   const response = await fetch('/api/push/send-firebase', {
     method: 'POST',
@@ -91,4 +69,5 @@ export async function sendTestNotification() {
   });
   const result = await response.json();
   console.log(result);
+  alert('Уведомление отправлено!');
 }
