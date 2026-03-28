@@ -45,6 +45,10 @@ const Home = () => {
           <button onClick={sendTestCoupon} className="btn-test">
             📱 Тестовое уведомление о купоне
           </button>
+          {/* Всегда показывать кнопку для теста */}
+<button onClick={sendTestCoupon} className="btn-test">
+  📱 Тестовое уведомление о купоне
+</button>
         )}
       </div>
 
