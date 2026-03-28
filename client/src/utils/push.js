@@ -1,69 +1,94 @@
-// Функция для преобразования ключа
-function urlBase64ToUint8Array(base64String) {
-  const padding = '='.repeat((4 - base64String.length % 4) % 4);
-  const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
-  const rawData = window.atob(base64);
-  const outputArray = new Uint8Array(rawData.length);
-  for (let i = 0; i < rawData.length; ++i) {
-    outputArray[i] = rawData.charCodeAt(i);
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+import { getMessaging, getToken, onMessage } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-messaging.js';
+
+// ВСТАВЬТЕ ВАШИ ДАННЫЕ ИЗ FIREBASE
+const firebaseConfig = {
+  apiKey: "ВАШ_API_KEY",
+  authDomain: "ВАШ_AUTH_DOMAIN",
+  projectId: "ВАШ_PROJECT_ID",
+  storageBucket: "ВАШ_STORAGE_BUCKET",
+  messagingSenderId: "ВАШ_MESSAGING_SENDER_ID",
+  appId: "ВАШ_APP_ID"
+};
+
+// VAPID ключ из Firebase (Cloud Messaging)
+const VAPID_KEY = "ВАШ_VAPID_КЛЮЧ";
+
+let messaging = null;
+let token = null;
+
+// Инициализация Firebase
+export function initFirebase() {
+  if (!messaging) {
+    const app = initializeApp(firebaseConfig);
+    messaging = getMessaging(app);
   }
-  return outputArray;
+  return messaging;
 }
 
-// Получение VAPID ключа с сервера
-async function getVapidPublicKey() {
-  const response = await fetch('/api/push/key');
-  const data = await response.json();
-  return data.publicKey;
-}
-
-// Сохранение подписки на сервере
-export async function subscribeToServer() {
-  if (!('serviceWorker' in navigator)) return false;
-  
-  const registration = await navigator.serviceWorker.ready;
-  const vapidPublicKey = await getVapidPublicKey();
-  
-  const subscription = await registration.pushManager.subscribe({
-    userVisibleOnly: true,
-    applicationServerKey: urlBase64ToUint8Array(vapidPublicKey)
-  });
-  
-  await fetch('/api/push/subscribe', {
-    method: 'POST',
-    body: JSON.stringify(subscription),
-    headers: { 'Content-Type': 'application/json' }
-  });
-  
-  return true;
-}
-
-// Запрос разрешения на уведомления
+// Запрос разрешения и получение токена
 export async function requestNotificationPermission() {
   if (!('Notification' in window)) {
-    alert('Браузер не поддерживает уведомления');
+    alert('Ваш браузер не поддерживает уведомления');
     return false;
   }
   
   const permission = await Notification.requestPermission();
-  if (permission !== 'granted') return false;
-  
-  // Регистрируем service worker
-  if ('serviceWorker' in navigator) {
-    await navigator.serviceWorker.register('/sw.js');
-    await subscribeToServer();
+  if (permission !== 'granted') {
+    alert('Уведомления не разрешены');
+    return false;
   }
   
-  return true;
+  try {
+    initFirebase();
+    
+    // Регистрируем service worker
+    const registration = await navigator.serviceWorker.register('/firebase-messaging-sw.js');
+    console.log('Service Worker зарегистрирован');
+    
+    // Получаем токен
+    token = await getToken(messaging, {
+      vapidKey: VAPID_KEY,
+      serviceWorkerRegistration: registration
+    });
+    
+    console.log('FCM Token:', token);
+    
+    // Сохраняем токен на сервере
+    await fetch('/api/push/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token, type: 'firebase' })
+    });
+    
+    // Слушаем уведомления, когда сайт открыт
+    onMessage(messaging, (payload) => {
+      console.log('Получено уведомление:', payload);
+      new Notification(payload.notification.title, {
+        body: payload.notification.body,
+        icon: '/favicon.svg'
+      });
+    });
+    
+    return true;
+  } catch (err) {
+    console.error('Ошибка:', err);
+    alert('Ошибка подключения уведомлений');
+    return false;
+  }
 }
 
-// Отправка уведомления о купоне (локально, для теста)
-export function sendCouponNotification(couponCode, discount) {
-  if (Notification.permission === 'granted') {
-    new Notification('🎁 Новый купон!', {
-      body: `Скидка ${discount}% по промокоду: ${couponCode}`,
-      icon: '/favicon.svg',
-      badge: '/favicon.svg'
-    });
-  }
+// Отправка тестового уведомления (через сервер)
+export async function sendTestNotification() {
+  const response = await fetch('/api/push/send-firebase', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      title: '🎁 Тестовый купон!',
+      body: 'Скидка 10% по промокоду TEST10',
+      url: '/price-list'
+    })
+  });
+  const result = await response.json();
+  console.log(result);
 }
